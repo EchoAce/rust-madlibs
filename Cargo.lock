@@ -1,0 +1,4 @@
+[root]
+name = "rust-madlibs"
+version = "0.0.1"
+

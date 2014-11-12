@@ -3,7 +3,10 @@
 
 use std::io::File;
 
-fn main {
+fn main() {
     let story = File::open(&Path::new("story.txt")).read_to_end();
-    
+    match story {
+        Ok(story) => println!("{}", story),
+        Err(msg) => println!("Oops: {}", msg),
+    }
 }
