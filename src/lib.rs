@@ -18,3 +18,9 @@ pub fn read_input() -> String {
     }
     story.to_string()
 }
+
+//modeled off of replace() in Rust 0.13
+pub fn replace_next(s: &str, from: &str, to: &str) -> String {
+    let mut result = String::new();
+    
+}
