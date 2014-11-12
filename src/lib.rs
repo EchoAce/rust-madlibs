@@ -1,15 +1,19 @@
 use std::io;
 
+
+// read_input keeps taking in lines from stdin until a single newline
+// is entered. It returns a String.
 pub fn read_input() -> String {
-    let mut story = "";
+    let mut story = "".to_string();
     println!("Please enter a line of the story. Enter a blank line to stop");
-    for line in io::stdin().lines() {
-        match line.to_string().as_slice() {
-            "Ok(\n)" => break,
-            _ => {
-                println!("Please enter a line of the story. Enter a blank line to stop");
-                //story = concat!(story, _);
-            },
+    loop {
+        let input = io::stdin().read_line().ok().expect("Failed to read line.");
+        let line = input.as_slice();
+        if line == "\n" {
+            break;
+        }
+        else {
+            story.push_str(line);
         }
     }
     story.to_string()
