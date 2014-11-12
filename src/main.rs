@@ -1,12 +1,18 @@
-// Example story: He was so [adjective] that he [verb]ed John in the face, sending him into a/an [noun].
+// Example story: He was so [adjective] that he [verb]ed John in the face,
+// sending him into a/an [noun].
 
-
-use std::io::File;
+use std::io;
 
 fn main() {
-    let story = File::open(&Path::new("story.txt")).read_to_end();
-    match story {
-        Ok(story) => println!("{}", story),
-        Err(msg) => println!("Oops: {}", msg),
+    let mut story = "";
+    println!("Please enter a line of the story. Enter a blank line to stop");
+    for line in io::stdin().lines() {
+        match line.to_string().as_slice() {
+            "Ok(\n)" => break,
+            _ => {
+                println!("Please enter a line of the story. Enter a blank line to stop");
+                //story = concat!(story, _);
+            },
+        }
     }
 }
