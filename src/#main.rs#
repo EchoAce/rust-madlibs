@@ -7,4 +7,6 @@ use madlibs::read_input;
 fn main() {
     let template = read_input();
     //println!("{}", template);
+
+    
 }
