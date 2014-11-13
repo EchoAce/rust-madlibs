@@ -18,15 +18,4 @@ fn user_input(wordType: &str) -> &str {
         println!("This is not a number");
         "no value"
     }
-
-    let index = 0;
-
-    match input.find_str(" or ") {
-        Some(number) => index = number,
-        None => index = 0
-    }
-
-    if index > 0 {
-
-    }
 }
