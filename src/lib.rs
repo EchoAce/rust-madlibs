@@ -1,6 +1,5 @@
 use std::io;
 
-
 // read_input keeps taking in lines from stdin until a single newline
 // is entered. It returns a String.
 pub fn read_input() -> String {
