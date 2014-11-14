@@ -21,33 +21,26 @@ pub fn read_input() -> String {
 }
 
 
-pub fn fill_blanks(mut template: String) -> String {
+pub fn fill_blanks(template: String) -> String {
     // this section can probably be improved...too many variables
     let mut l_iter = template.match_indices("[");
     let mut r_iter = template.match_indices("]");
-    let mut l_duple = l_iter.next();
-    let mut r_duple = r_iter.next();
-    while l_duple != None {
-        let l_index = match l_duple {
-            Some((x, y)) => x,
-            None => -1
-        };
-        let r_index = match r_duple {
-            Some((x, y)) => y,
-            None => -1
-        };
-        println!("Give me a/an {}", unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)});
-        let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
-        /*
-        let mut result = String::new();
-        result.push_str(unsafe{raw::slice_bytes(template, 0, l_index)});
-        result.push_str(input.as_slice());
-        result.push_str(unsafe{raw::slice_bytes(template, r_index, template.char_len())});
-        template = result.as_slice();
-        */
-        template = replace(template.as_slice(), unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)}, input.as_slice());
-        l_duple = l_iter.next();
-        r_duple = r_iter.next();
+    let l_duple = l_iter.next();
+    let r_duple = r_iter.next();
+    let l_index = match l_duple {
+        Some((x, y)) => x,
+        None => -1,
+    };
+    let r_index = match r_duple {
+        Some((x, y)) => y,
+        None => -1,
+    };
+    if l_index == -1 {
+        template.as_slice().to_string()
     }
-    template.to_string()
+    else {
+        println!("Give me a/an {}", unsafe{raw::slice_bytes(template.as_slice(), l_index + 1, r_index - 1)});
+        let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
+        replace(template.as_slice(), unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)}, input.as_slice())
+    }
 }
