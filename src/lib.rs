@@ -1,5 +1,6 @@
 use std::io;
 use std::str::raw;
+use std::str::replace;
 
 // read_input keeps taking in lines from stdin until a single newline
 // is entered. It returns a String.
@@ -20,7 +21,7 @@ pub fn read_input() -> String {
 }
 
 
-pub fn fill_blanks(template: &str) -> String {
+pub fn fill_blanks(mut template: String) -> String {
     // this section can probably be improved...too many variables
     let mut l_iter = template.match_indices("[");
     let mut r_iter = template.match_indices("]");
@@ -35,7 +36,7 @@ pub fn fill_blanks(template: &str) -> String {
             Some((x, y)) => y,
             None => -1
         };
-        println!("Give me a/an {}", unsafe{raw::slice_bytes(template, l_index, r_index)});
+        println!("Give me a/an {}", unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)});
         let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
         /*
         let mut result = String::new();
@@ -44,6 +45,7 @@ pub fn fill_blanks(template: &str) -> String {
         result.push_str(unsafe{raw::slice_bytes(template, r_index, template.char_len())});
         template = result.as_slice();
         */
+        template = replace(template.as_slice(), unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)}, input.as_slice());
         l_duple = l_iter.next();
         r_duple = r_iter.next();
     }

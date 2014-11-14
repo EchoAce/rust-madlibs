@@ -9,7 +9,7 @@ fn main() {
     let mut template = read_input();
     // println!("{}", template);
 
-    template = fill_blanks(template.as_slice());
+    template = fill_blanks(template);
 
     println!("{}", template);
 }
