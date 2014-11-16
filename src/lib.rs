@@ -20,9 +20,11 @@ pub fn read_input() -> String {
     story.to_string()
 }
 
-
+// fill_blanks takes in a string, representing the current template
+// and both prompts and replaces for an item in brackets [].
+// A string, the modified story, is returned.
+#[allow(unused_variables)]
 pub fn fill_blanks(s: &str) -> String {
-    // this section can probably be improved...too many variables
     let mut l_iter = s.match_indices("[");
     let mut r_iter = s.match_indices("]");
     let l_duple = l_iter.next();
@@ -39,8 +41,8 @@ pub fn fill_blanks(s: &str) -> String {
         s.to_string()
     }
     else {
-        println!("Give me a/an {}", unsafe{raw::slice_bytes(s.as_slice(), l_index + 1, r_index - 1)});
+        println!("Give me a/an {}!", unsafe{raw::slice_bytes(s.as_slice(), l_index + 1, r_index - 1)});
         let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
-        replace(s.as_slice(), unsafe{raw::slice_bytes(s.as_slice(), l_index, r_index)}, input.as_slice())
+        replace(s.as_slice(), unsafe{raw::slice_bytes(s.as_slice(), l_index, r_index)}, input.as_slice().trim())
     }
 }
