@@ -8,13 +8,15 @@ use madlibs::fill_blanks;
 fn main() {
     let template = read_input();
     // println!("{}", template);
-
+    let mut story = fill_blanks(template.as_slice());
+    
     loop {
-        let result = fill_blanks(template);
-        if result.as_slice() == template.as_slice() {
+        println!("{}", story.as_slice());
+        if story.match_indices("[").next() == None {
             break;
         }
+        story = fill_blanks(story.as_slice());
     }
 
-    println!("{}", template);
+    println!("{}", story);
 }

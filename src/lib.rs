@@ -21,10 +21,10 @@ pub fn read_input() -> String {
 }
 
 
-pub fn fill_blanks(template: String) -> String {
+pub fn fill_blanks(s: &str) -> String {
     // this section can probably be improved...too many variables
-    let mut l_iter = template.match_indices("[");
-    let mut r_iter = template.match_indices("]");
+    let mut l_iter = s.match_indices("[");
+    let mut r_iter = s.match_indices("]");
     let l_duple = l_iter.next();
     let r_duple = r_iter.next();
     let l_index = match l_duple {
@@ -36,11 +36,11 @@ pub fn fill_blanks(template: String) -> String {
         None => -1,
     };
     if l_index == -1 {
-        template.as_slice().to_string()
+        s.to_string()
     }
     else {
-        println!("Give me a/an {}", unsafe{raw::slice_bytes(template.as_slice(), l_index + 1, r_index - 1)});
+        println!("Give me a/an {}", unsafe{raw::slice_bytes(s.as_slice(), l_index + 1, r_index - 1)});
         let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
-        replace(template.as_slice(), unsafe{raw::slice_bytes(template.as_slice(), l_index, r_index)}, input.as_slice())
+        replace(s.as_slice(), unsafe{raw::slice_bytes(s.as_slice(), l_index, r_index)}, input.as_slice())
     }
 }
