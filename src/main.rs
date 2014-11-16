@@ -6,8 +6,8 @@ use madlibs::read_input;
 use madlibs::fill_blanks;
 
 fn main() {
+    // functions in lib.rs
     let template = read_input();
-    // println!("{}", template);
     let mut story = fill_blanks(template.as_slice());
     
     loop {
@@ -17,6 +17,6 @@ fn main() {
         }
         story = fill_blanks(story.as_slice());
     }
-
+    
     println!("{}", story);
 }
