@@ -6,10 +6,17 @@ use madlibs::read_input;
 use madlibs::fill_blanks;
 
 fn main() {
-    let mut template = read_input();
+    let template = read_input();
     // println!("{}", template);
+    let mut story = fill_blanks(template.as_slice());
+    
+    loop {
+        println!("{}", story.as_slice());
+        if story.match_indices("[").next() == None {
+            break;
+        }
+        story = fill_blanks(story.as_slice());
+    }
 
-    template = fill_blanks(template);
-
-    println!("{}", template);
+    println!("{}", story);
 }
