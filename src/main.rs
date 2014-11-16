@@ -11,7 +11,7 @@ fn main() {
     let mut story = fill_blanks(template.as_slice());
     
     loop {
-        println!("{}", story.as_slice());
+        //println!("{}", story.as_slice());
         if story.match_indices("[").next() == None {
             break;
         }
