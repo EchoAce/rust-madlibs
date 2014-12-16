@@ -1,5 +1,4 @@
 [package]
 
 name = "rust-madlibs"
-version = "0.1.0"
 authors = ["Andrew Li (EchoAce) <andrewyli@gmail.com>"]
