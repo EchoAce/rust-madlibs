@@ -1,5 +1,4 @@
 use std::io;
-use std::str::raw;
 use std::str::replace;
 
 // read_input keeps taking in lines from stdin until a single newline
@@ -41,8 +40,8 @@ pub fn fill_blanks(s: &str) -> String {
         s.to_string()
     }
     else {
-        println!("Give me a/an {}!", unsafe{raw::slice_bytes(s.as_slice(), l_index + 1, r_index - 1)});
+        println!("Give me a/an {}!", s.slice(l_index + 1, r_index - 1));
         let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
-        replace(s.as_slice(), unsafe{raw::slice_bytes(s.as_slice(), l_index, r_index)}, input.as_slice().trim())
+        replace(s.as_slice(), s.slice(l_index, r_index), input.as_slice().trim())
     }
 }
