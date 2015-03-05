@@ -1,5 +1,9 @@
+#[feature(plugin)]
+#[macro_use] #[plugin] #[no_link]
+extern crate regex_macros;
+extern crate regex;
 use std::io;
-use std::str::replace;
+use regex::Regex;
 
 // read_input keeps taking in lines from stdin until a single newline
 // is entered. It returns a String.
@@ -42,6 +46,8 @@ pub fn fill_blanks(s: &str) -> String {
     else {
         println!("Give me a/an {}!", s.slice(l_index + 1, r_index - 1));
         let input = std::io::stdin().read_line().ok().expect("Failed to fill blank.");
-        replace(s.as_slice(), s.slice(l_index, r_index), input.as_slice().trim())
+        let re = regex!(s.as_slice());
+        re.replace(s.slice(l_index, r_index), input.as_slice().trim());
+        re.as_str().to_string();
     }
 }
